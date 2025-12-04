@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Expenses API</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    pre { background: #f5f5f5; padding: 20px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Expenses API (Vercel Serverless)</h1>
+
+  <p>Available endpoints:</p>
+  <ul>
+    <li><strong>GET /api/expenses</strong> – List all expenses</li>
+    <li><strong>POST /api/expenses</strong> – Add a new expense</li>
+  </ul>
+
+  <p>Example POST body:</p>
+  <pre>{
+  "amount": 25.50,
+  "description": "Lunch",
+  "category": "Food",
+  "date": "2025-01-01"
+}</pre>
+</body>
+</html>
