@@ -1,0 +1,46 @@
+let expenses = [];
+
+export default function handler(req, res) {
+  if (req.method === "GET") {
+    return res.status(200).json({ success: true, data: expenses });
+  }
+
+  if (req.method === "POST") {
+    try {
+      const { amount, description, category, date } = req.body || {};
+
+      const missing = [];
+      if (amount === undefined) missing.push("amount");
+      if (!description) missing.push("description");
+      if (!category) missing.push("category");
+      if (!date) missing.push("date");
+
+      if (missing.length > 0) {
+        return res.status(400).json({
+          success: false,
+          error: `Missing required fields: ${missing.join(", ")}`
+        });
+      }
+
+      const expense = {
+        id: expenses.length + 1,
+        amount: Number(amount),
+        description,
+        category,
+        date
+      };
+
+      expenses.push(expense);
+
+      return res.status(201).json({ success: true, data: expense });
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        error: "Server error",
+        details: err.message
+      });
+    }
+  }
+
+  return res.status(405).json({ success: false, error: "Method not allowed" });
+}
